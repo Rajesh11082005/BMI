@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- <div class="circle circle1"></div>
+    <div class="circle circle2"></div> -->
+    <div class="main-wrapper">
+        
+        <div class="nav">
+            <div class="heading">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 23C7.85786 23 4.5 19.6421 4.5 15.5C4.5 13.3462 5.40786 11.4045 6.86179 10.0366C8.20403 8.77375 11.5 6.49951 11 1.5C17 5.5 20 9.5 14 15.5C15 15.5 16.5 15.5 19 13.0296C19.2697 13.8032 19.5 14.6345 19.5 15.5C19.5 19.6421 16.1421 23 12 23Z" fill="black"/>
+                </svg>
+                <h1>BMI</h1>                    
+            </div>
+            <input type="checkbox" id="checkbox">
+            <label for="checkbox" class="toggle">
+                <div class="bars" id="bar1"></div>
+                <div class="bars" id="bar2"></div>
+                <div class="bars" id="bar3"></div>
+            </label>
+            <div class="popup">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 23C7.85786 23 4.5 19.6421 4.5 15.5C4.5 13.3462 5.40786 11.4045 6.86179 10.0366C8.20403 8.77375 11.5 6.49951 11 1.5C17 5.5 20 9.5 14 15.5C15 15.5 16.5 15.5 19 13.0296C19.2697 13.8032 19.5 14.6345 19.5 15.5C19.5 19.6421 16.1421 23 12 23Z" fill="black"/>
+                </svg>
+                <h1>BMI Calculator</h1><br>
+                <p>BMI is used to diagnose the Body Fitness or Health of an Individual. <br><br>
+                    <b>BMI 0-11:</b> Severely Underweight, Consult Dietician. <br>
+                    <b>BMI 11-18.5:</b> Underweight, Care Needed. <br>
+                    <b>BMI 18.5-25:</b> Healthy Body. <br>
+                    <b>BMI 25-30:</b> Overweight, Care Needed. <br>
+                    <b>BMI 30+:</b> Severely Overweight, Consult Dietician. <br>
+                </p>
+            </div>
+        </div>
+        <div class="pages" id="pages">
+            <div class="page1">
+                <div class="gender-wrapper">
+                    <div class="male-box gbox" id="main-male-box">
+                        <input type="checkbox" id="male" class="mcb">
+                        <label for="male">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="rgba(0, 0, 0, 0.716)">
+                                <path d="M18.5858 5H14V3H22V11H20V6.41421L16.4633 9.95088C17.4274 11.2127 18 12.7895 18 14.5C18 18.6421 14.6421 22 10.5 22C6.35786 22 3 18.6421 3 14.5C3 10.3579 6.35786 7 10.5 7C12.2105 7 13.7873 7.57264 15.0491 8.53666L18.5858 5Z" fill="black"/>
+                            </svg>
+                        </label>
+                    </div>
+                    OR
+                    <div class="female-box gbox" id="main-female-box">
+                        <input type="checkbox" id="female" class="fcb">
+                        <label for="female">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="rgba(0, 0, 0, 0.716)">
+                                <path d="M11 15.9339C7.33064 15.445 4.5 12.3031 4.5 8.5C4.5 4.35786 7.85786 1 12 1C16.1421 1 19.5 4.35786 19.5 8.5C19.5 12.3031 16.6694 15.445 13 15.9339V18H18V20H13V24H11V20H6V18H11V15.9339Z" fill="black"/>
+                            </svg>
+                        </label>
+                    </div>
+                </div>
+
+                <input type="number" placeholder="Height(in cms)" id="height">
+                <div class="weight-counter-wrappper">
+
+                    <input class="weight-counter" type="number" id="weight-counter" placeholder="Weight(in kgs)">
+
+                    <div class="bt-wrapper">
+                    <button class="incdec" onclick="dec()">-</button>
+                    <button class="incdec" onclick="inc()">+</button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="page2" id="page2">
+                <div class="msg-weight-type">
+                    <h2 id="type">-----</h2>
+                </div>
+                <div class="msg-bmi-value">
+                    <h1 id="bmi">------kg/m<sup>2</sup></h1>
+                </div>
+                <div class="sug-bmi-value">
+                    <h2>Suggest BMI range</h2>
+                    <h3>18.5 ~ 24.0 kg/m<sup>2</sup></h3>
+                </div>
+                <div class="main-msg">
+                    <h2 id="msg">------</h2>
+                </div>
+            </div>
+
+        </div>
+        <button class="calculate" id="calculate" onclick="calculate();changePage();">Calculate</button>
+    </div>
+    
+</body>
+<script>
+    const maleCheckbox = document.getElementById("male");
+    const femaleCheckbox = document.getElementById("female");
+    maleCheckbox.addEventListener("change", function () {
+        if (maleCheckbox.checked) {
+            femaleCheckbox.checked = false;
+        }
+    });
+
+    femaleCheckbox.addEventListener("change", function () {
+        if (femaleCheckbox.checked) {
+            maleCheckbox.checked = false;
+        }
+    });
+
+    const weightcountbox = document.getElementById("weight-counter");
+    var c = 0;
+
+    function checkForNegative() {
+        if (c < 0) {
+            c = 0;
+            weightcountbox.value = c;
+        }
+    }
+
+    function inc() {
+        if (weightcountbox.value === "") {
+            weightcountbox.value = 0;
+        }
+        c = parseInt(weightcountbox.value);
+        c++;
+        checkForNegative();
+        weightcountbox.value = c;
+    }
+
+    function dec() {
+        if (weightcountbox.value === "") {
+            weightcountbox.value = 0;
+        }
+        c = parseInt(weightcountbox.value);
+        c--;
+        checkForNegative();
+        weightcountbox.value = c;
+    }
+</script>
+<script src="script.js"></script>
+</html>
